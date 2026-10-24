@@ -133,7 +133,7 @@ jobs:
           name: tr3000-512-diagnostics-${{ github.run_number }}
           path: |
             build.log
-            .config
+            build.config
             logs/
             tr3000-512.patch
           if-no-files-found: ignore
