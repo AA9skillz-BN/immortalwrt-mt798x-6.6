@@ -18,13 +18,6 @@
 #include <linux/netdevice.h>
 #include "../mtk_eth_soc.h"
 
-/* Frame Engine Reset FSM */
-#define MTK_FE_START_RESET	0x2000
-#define MTK_FE_RESET_DONE	0x2001
-#define MTK_WIFI_RESET_DONE	0x2002
-#define MTK_WIFI_CHIP_ONLINE 	0x2003
-#define MTK_WIFI_CHIP_OFFLINE 	0x2004
-#define MTK_FE_RESET_NAT_DONE	0x4001
 #define HNAT_SKB_CB2(__skb) ((struct hnat_skb_cb2 *)&((__skb)->cb[44]))
 struct hnat_skb_cb2 {
 	__u32 magic;
@@ -120,7 +113,6 @@ struct hnat_desc {
 #define HIT_BIND_KEEPALIVE_UC_OLD_HDR 0x13
 #define HIT_BIND_KEEPALIVE_MC_NEW_HDR 0x14
 #define HIT_BIND_KEEPALIVE_DUP_OLD_HDR 0x15
-#define HIT_BIND_FORCE_TO_CPU 0x16
 #define HIT_BIND_WITH_OPTION_HEADER 0x17
 #define HIT_BIND_MULTICAST_TO_CPU 0x18
 #define HIT_BIND_MULTICAST_TO_GMAC_CPU 0x19
