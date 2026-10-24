@@ -1,0 +1,18 @@
+--- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
++++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
+@@ -8,6 +8,15 @@
+
+ #ifndef MTK_ETH_H
+ #define MTK_ETH_H
++
++/* Shared Ethernet/Wi-Fi reset events and PPE CPU reason. */
++#define MTK_FE_START_RESET	0x2000
++#define MTK_FE_RESET_DONE	0x2001
++#define MTK_WIFI_RESET_DONE	0x2002
++#define MTK_WIFI_CHIP_ONLINE	0x2003
++#define MTK_WIFI_CHIP_OFFLINE	0x2004
++#define MTK_FE_RESET_NAT_DONE	0x4001
++#define HIT_BIND_FORCE_TO_CPU	0x16
+
+ #include <linux/dma-mapping.h>
+ #include <linux/netdevice.h>
