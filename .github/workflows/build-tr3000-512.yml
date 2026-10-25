@@ -84,7 +84,11 @@ jobs:
           CONFIG_TARGET_mediatek_filogic=y
           CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-v1=y
           CONFIG_PACKAGE_luci=y
-          CONFIG_PACKAGE_luci-ssl=y
+          # CONFIG_PACKAGE_luci-ssl is not set
+          CONFIG_PACKAGE_luci-ssl-openssl=y
+          CONFIG_PACKAGE_libustream-openssl=y
+          # CONFIG_PACKAGE_libustream-mbedtls is not set
+          # CONFIG_PACKAGE_libustream-wolfssl is not set
           CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
           CONFIG_PACKAGE_bash=y
           CONFIG_PACKAGE_curl=y
@@ -100,8 +104,15 @@ jobs:
           CONFIG_PACKAGE_kmod-nft-nat=y
           EOF
           make defconfig
-          grep -qx 'CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-v1=y' .config
           cp .config build.config
+          grep -qx 'CONFIG_TARGET_mediatek_filogic_DEVICE_cudy_tr3000-v1=y' .config
+          # All libustream variants install the same shared library; use OpenSSL only.
+          grep -qx 'CONFIG_PACKAGE_luci-ssl-openssl=y' .config
+          grep -qx 'CONFIG_PACKAGE_libustream-openssl=y' .config
+          if grep -Eq '^CONFIG_PACKAGE_(luci-ssl|libustream-mbedtls|libustream-wolfssl)=[ym]$' .config; then
+            echo 'Conflicting LuCI/libustream TLS backends selected' >&2
+            exit 1
+          fi
           
 
       - name: Download sources
